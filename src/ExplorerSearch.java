@@ -45,21 +45,21 @@ public class ExplorerSearch {
         // UP
         int newY = y - 1;     
 
-        if(newY >= 0 && (island[x][newY] != 2 || island[x][newY] != 3 ) ){
+        if(newY >= 0 && island[x][newY] == 1 ){
             validLocs.add( new int[]{x, newY});
         }
 
         // DOWN
         newY = y + 1;     
 
-        if(newY < island.length && (island[x][newY] != 2 || island[x][newY] != 3 ) ){
+        if(newY < island.length && island[x][newY] == 1){
             validLocs.add(new int[]{x, newY});
         }
 
         // LEFT
        int newX = x - 1;     
 
-        if(newX >= 0 && (island[newX][y] != 2 || island[newX][y] != 3 ) ){
+        if(newX >= 0 && island[newX][y] == 1 ){
             validLocs.add( new int[]{newX, y});
         }
 
@@ -67,7 +67,7 @@ public class ExplorerSearch {
         // LEFT
         newX = x + 1;     
 
-        if(newX < island[0].length && (island[newX][y] != 2 || island[newX][y] != 3 ) ){
+        if(newX < island[0].length && island[newX][y] == 1 ){
             validLocs.add( new int[]{newX, y});
         }
 

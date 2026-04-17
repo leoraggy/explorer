@@ -1,4 +1,9 @@
 import static org.junit.Assert.*;
+
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
+
 import org.junit.Test;
 
 public class ExplorerSearchTest {
@@ -52,5 +57,33 @@ public class ExplorerSearchTest {
         ExplorerSearch.startLocation(island);
     });
     }
-    
+
+    @Test
+    public void testPossibleMoves_allDirectionsOpen() {
+       int[][] island = {
+            {1, 1, 1},
+            {1, 0, 1},
+            {1, 1, 1},
+        };
+       
+        int[] location = {1, 1};
+        List<int[]> moves = ExplorerSearch.possibleMoves(island, location);
+        Set<String> moveSet = toSet(moves);
+
+        assertEquals(4, moves.size());
+        assertTrue(moveSet.contains("0,1")); // up
+        assertTrue(moveSet.contains("2,1")); // down
+        assertTrue(moveSet.contains("1,0")); // left
+        assertTrue(moveSet.contains("1,2")); // right
+    }
+
+
+     private Set<String> toSet(List<int[]> list) {
+        Set<String> set = new HashSet<>();
+        for (int[] arr : list) {
+            set.add(arr[0] + "," + arr[1]);
+        }
+        return set;
+    }
+
 }
