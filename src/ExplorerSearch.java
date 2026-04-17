@@ -1,5 +1,7 @@
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 public class ExplorerSearch {
 
@@ -29,10 +31,30 @@ public class ExplorerSearch {
      * @return the number of spaces the explorer can reach
      */
     public static int reachableArea(int[][] island) {
-        // Implement your method here!
-        // Please also make more test cases
-        // I STRONGLY RECOMMEND testing some helpers you might make too
-        return -1;
+        Set<String> visited = new HashSet<>();
+
+        int[] start = startLocation(island);
+
+        reachableArea(start, island, visited);
+
+        return visited.size();
+    }
+
+    private static void reachableArea(int[] currentLoc, int[][] island, Set<String> visited){
+        int row = currentLoc[0];
+        int col = currentLoc[1];
+
+        String coordinates = row + "," + col;
+
+        if(visited.contains(coordinates)){
+            return;
+        }
+
+       visited.add(coordinates);
+
+        for(int[] move : possibleMoves(island, currentLoc)){
+            reachableArea(move, island, visited);
+        }
     }
 
     public static List<int[]> possibleMoves(int[][] island, int[] location) {
@@ -42,33 +64,28 @@ public class ExplorerSearch {
         List<int[]> validLocs = new ArrayList<>();
 
 
-        // UP
-        int newY = y - 1;     
-
-        if(newY >= 0 && island[x][newY] == 1 ){
-            validLocs.add( new int[]{x, newY});
+       // UP 
+        int newX = x - 1; 
+        if (newX >= 0 && island[newX][y] == 1) {
+            validLocs.add(new int[]{newX, y});
         }
 
-        // DOWN
-        newY = y + 1;     
-
-        if(newY < island.length && island[x][newY] == 1){
-            validLocs.add(new int[]{x, newY});
+        // RIGHT
+        newX = x + 1; 
+        if (newX < island.length && island[newX][y] == 1) {
+            validLocs.add(new int[]{newX, y});
         }
 
         // LEFT
-       int newX = x - 1;     
-
-        if(newX >= 0 && island[newX][y] == 1 ){
-            validLocs.add( new int[]{newX, y});
+        int newY = y - 1; 
+        if (newY >= 0 && island[x][newY] == 1) {
+            validLocs.add(new int[]{x, newY});
         }
 
-
-        // Right
-        newX = x + 1;     
-
-        if(newX < island[0].length && island[newX][y] == 1 ){
-            validLocs.add( new int[]{newX, y});
+        // RIGHT
+        newY = y + 1; 
+        if (newY < island[0].length && island[x][newY] == 1) {
+            validLocs.add(new int[]{x, newY});
         }
 
         return validLocs;
