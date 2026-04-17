@@ -15,6 +15,41 @@ public class ExplorerSearchTest {
         assertEquals(14, actual);
     }
 
-    // Add more tests here!
-    // Come up with varied cases
+
+    @Test
+    public void testExplorerLocation_centerOfGrid() {
+        int[][] island = {
+            {1, 1, 1},
+            {1, 0, 1},
+            {1, 1, 1},
+        };
+        int[] actual = ExplorerSearch.startLocation(island);
+        int[] expected = {1, 1};
+        assertArrayEquals(expected, actual);
+    }
+
+    @Test
+    public void testExplorerLocation_topLeftCorner() {
+        int[][] island = {
+            {0, 1, 1},
+            {1, 1, 1},
+            {1, 1, 1},
+        };
+        int[] actual = ExplorerSearch.startLocation(island);
+        int[] expected = {0, 0};
+        assertArrayEquals(expected, actual);
+    }
+
+    @Test
+    public void testExplorerLocation_notFound_throwsException() {
+        int[][] island = {
+            {1, 1, 1},
+            {1, 1, 1},
+            {1, 1, 1},
+        };
+       
+       assertThrows(IllegalArgumentException.class, () -> {
+        ExplorerSearch.startLocation(island);
+    });
+    }
 }
