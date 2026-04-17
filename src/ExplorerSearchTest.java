@@ -77,6 +77,72 @@ public class ExplorerSearchTest {
         assertTrue(moveSet.contains("1,2")); // right
     }
 
+    @Test
+    public void testPossibleMoves_leftOpenOnlyWaterOnly() {
+       int[][] island = {
+            {1, 2, 1},
+            {1, 0, 2},
+            {1, 2, 1},
+        };
+       
+        int[] location = {1, 1};
+        List<int[]> moves = ExplorerSearch.possibleMoves(island, location);
+        Set<String> moveSet = toSet(moves);
+
+        assertEquals(1, moves.size());
+        assertTrue(moveSet.contains("1,0")); // left
+    }
+
+    @Test
+    public void testPossibleMoves_RightOpenOnlyMountainOnly() {
+       int[][] island = {
+            {1, 3, 1},
+            {3, 0, 1},
+            {1, 3, 1},
+        };
+       
+        int[] location = {1, 1};
+        List<int[]> moves = ExplorerSearch.possibleMoves(island, location);
+        Set<String> moveSet = toSet(moves);
+
+        assertEquals(1, moves.size());
+        assertTrue(moveSet.contains("1,2")); // right
+    }
+
+    @Test
+    public void testPossibleMoves_upOpenOnlyMixed() {
+       int[][] island = {
+            {1, 1, 1},
+            {2, 0, 3},
+            {1, 2, 1},
+        };
+       
+        int[] location = {1, 1};
+        List<int[]> moves = ExplorerSearch.possibleMoves(island, location);
+        Set<String> moveSet = toSet(moves);
+
+        assertEquals(1, moves.size());
+        assertTrue(moveSet.contains("0,1")); // left
+    }
+
+    @Test
+    public void testPossibleMoves_upAndDownOpen() {
+       int[][] island = {
+            {1, 1, 1},
+            {2, 0, 3},
+            {1, 1, 1},
+        };
+       
+        int[] location = {1, 1};
+        List<int[]> moves = ExplorerSearch.possibleMoves(island, location);
+        Set<String> moveSet = toSet(moves);
+
+        assertEquals(2, moves.size());
+        assertTrue(moveSet.contains("0,1"));
+         assertTrue(moveSet.contains("2,1")); 
+    }
+
+
 
      private Set<String> toSet(List<int[]> list) {
         Set<String> set = new HashSet<>();

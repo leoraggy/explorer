@@ -64,7 +64,7 @@ public class ExplorerSearch {
         }
 
 
-        // LEFT
+        // Right
         newX = x + 1;     
 
         if(newX < island[0].length && island[newX][y] == 1 ){
